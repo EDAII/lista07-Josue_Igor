@@ -6,9 +6,8 @@ def knapsack_recursive(capacidade, peso, valor, tamanho):
         resultado = knapsack_recursive(capacidade, peso, valor, tamanho-1) 
         return resultado
     else: 
-        resultado = max(valor[tamanho-1] + knapsack_recursive(capacidade-peso[tamanho-1], peso , valor , tamanho-1), 
+        resultado = max(valor[tamanho-1] + knapsack_recursive(capacidade-peso[tamanho-1], peso, valor, tamanho-1), 
                    knapsack_recursive(capacidade, peso, valor, tamanho-1)) 
-        # print("oi", tamanho)
         return resultado
   
 # valor = [100, 20, 60, 40] 
@@ -20,7 +19,7 @@ peso = [1, 2, 5, 6, 7]
 capacidade = 11
 tamanho = len(valor) 
 
-print(knapsack_recursive(capacidade, peso, valor, tamanho))
+print("Recursivo - Valor Maximo: ",knapsack_recursive(capacidade, peso, valor, tamanho))
 
  
 def knapsack_interactive(capacidade, peso, valor, tamanho): 
@@ -34,7 +33,9 @@ def knapsack_interactive(capacidade, peso, valor, tamanho):
                 K[i][w] = max(valor[i-1] + K[i-1][w-peso[i-1]],  K[i-1][w]) 
             else: 
                 K[i][w] = K[i-1][w] 
-  
+    for j in range(tamanho+1):
+        print(K[j])
+
     return K[tamanho][capacidade] 
   
 # valor = [60, 100, 120] 
@@ -49,4 +50,4 @@ tamanho = len(valor)
 # peso = [1, 2, 5, 6, 7] 
 # capacidade = 11
 # tamanho = len(valor) 
-print(knapsack_interactive(capacidade, peso, valor, tamanho)) 
+print("Interativo - Valor Maximo: ",knapsack_interactive(capacidade, peso, valor, tamanho)) 
